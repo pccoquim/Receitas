@@ -16,7 +16,7 @@ CREATE TABLE user (
 	lastname VARCHAR(50) NOT NULL,
     password VARCHAR(255) NOT NULL, -- será encriptada
 	email VARCHAR(100) NOT NULL UNIQUE,
-	tokem VARCHAR(255) NOT NULL,
+	token VARCHAR(255) NOT NULL,
 	active BOOLEAN DEFAULT FALSE,
     is_admin BOOLEAN DEFAULT FALSE,
 	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -40,6 +40,7 @@ CREATE TABLE type(
 	id INT AUTO_INCREMENT PRIMARY KEY,
 	type VARCHAR(50) NOT NULL,
 	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    created_by INT,
 	updated_at DATETIME,
 	updated_by INT,
 	FOREIGN KEY (created_by) REFERENCES user(id)
@@ -98,7 +99,7 @@ CREATE TABLE recipe (
 	updated_by INT,
 	FOREIGN KEY (created_by) REFERENCES user(id),
 	FOREIGN KEY (id_type) REFERENCES type(id),
-	FOREIGN KEY (id_difficulty) REFERENCES difficulty(id),
+	FOREIGN KEY (id_difficulty) REFERENCES difficulty_level(id),
 	FOREIGN KEY (id_country) REFERENCES country(id)
 	);
 	
